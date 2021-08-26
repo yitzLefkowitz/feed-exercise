@@ -9,14 +9,24 @@ import java.lang.IllegalArgumentException
  * This view model manages the data for [FeedFragment].
  */
 open class FeedViewModel : ViewModel() {
-    private val isLoading = MutableLiveData<Boolean>()
-    private val isEmpty = MutableLiveData<Boolean>()
-    private val feedItems = MediatorLiveData<List<FeedItem>>()
+    private val stateInternal: MutableLiveData<State> = MutableLiveData<State>(DEFAULT_STATE)
     private val networkErrorEvent = MutableLiveData<Event<String>>()
 
-    fun getIsLoading(): LiveData<Boolean> = isLoading
-    fun getIsEmpty(): LiveData<Boolean> = isEmpty
-    fun getFeedItems(): LiveData<List<FeedItem>> = feedItems
+    fun getIsLoading(): LiveData<Boolean> {
+        //todo: fix the implementation
+        return MutableLiveData()
+    }
+
+    fun getIsEmpty(): LiveData<Boolean> {
+        //todo: fix the implementation
+        return MutableLiveData()
+    }
+
+    fun getFeedItems(): LiveData<List<FeedItem>> {
+        //todo: fix the implementation
+        return MutableLiveData()
+    }
+
     fun getNetworkErrorEvent(): LiveData<Event<String>> = networkErrorEvent
 
     init {
@@ -25,8 +35,24 @@ open class FeedViewModel : ViewModel() {
 
     fun refresh() {
         //todo: fix the implementation
-        isLoading.value = false
-        isEmpty.value = true
+    }
+
+    private fun updateState(transform: State.() -> State) {
+        stateInternal.value = transform(getState())
+    }
+
+    private fun getState(): State {
+        return stateInternal.value!!
+    }
+
+    data class State(
+        val feedItems: List<FeedItem>?,
+        val isLoading: Boolean)
+
+    companion object {
+        private val DEFAULT_STATE = State(
+            feedItems = null,
+            isLoading = false)
     }
 }
 
