@@ -11,19 +11,3 @@ import java.util.concurrent.TimeUnit
 class FeedRepositoryTest {
    //todo: add the tests here
 }
-
-private fun <T> LiveData<T>.blockingObserve(): T? {
-    var value: T? = null
-    val latch = CountDownLatch(1)
-    val observer = object : Observer<T> {
-        override fun onChanged(t: T) {
-            value = t
-            latch.countDown()
-            removeObserver(this)
-        }
-    }
-
-    observeForever(observer)
-    latch.await(5, TimeUnit.SECONDS)
-    return value
-}
