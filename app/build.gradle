@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -46,6 +47,11 @@ android {
 }
 
 dependencies {
+
+    // hilt
+    String dagger_version = "2.42"
+    implementation "com.google.dagger:hilt-android:$dagger_version"
+    kapt "com.google.dagger:hilt-compiler:$dagger_version"
 
     // compose
     implementation "androidx.compose.ui:ui:$compose_version"
