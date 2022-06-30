@@ -2,6 +2,7 @@ package com.lightricks.feedexercise.di
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.lightricks.feedexercise.data.OkHttpClientFactory
+import com.lightricks.feedexercise.network.FeedApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,4 +33,9 @@ object DataModule {
             .addConverterFactory(Json.asConverterFactory(contentType))
             .build()
     }
+
+    @Singleton
+    @Provides
+    fun provideFeedApiService(retrofit: Retrofit): FeedApiService =
+        retrofit.create(FeedApiService::class.java)
 }
