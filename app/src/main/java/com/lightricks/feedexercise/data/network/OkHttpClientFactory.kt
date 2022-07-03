@@ -1,4 +1,4 @@
-package com.lightricks.feedexercise.data
+package com.lightricks.feedexercise.data.network
 
 import com.lightricks.feedexercise.BuildConfig
 import okhttp3.OkHttpClient

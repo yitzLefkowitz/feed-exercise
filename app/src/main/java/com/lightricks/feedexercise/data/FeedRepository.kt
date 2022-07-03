@@ -1,6 +1,7 @@
 package com.lightricks.feedexercise.data
 
-import com.lightricks.feedexercise.network.FeedApiService
+import com.lightricks.feedexercise.data.database.FeedDatabase
+import com.lightricks.feedexercise.data.network.FeedApiService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 import javax.inject.Inject
@@ -22,14 +23,16 @@ sealed class RefreshFeedResult {
 
 @Singleton
 class FeedRepositoryImpl @Inject constructor(
-    private val feedApi: FeedApiService
-): FeedRepository {
+    private val feedApi: FeedApiService,
+    feedDatabase: FeedDatabase) : FeedRepository {
+
+    private val feedDao = feedDatabase.feedDao()
 
     override fun getFeed(): Flow<List<FeedItem>> = emptyFlow()
 
     override suspend fun refreshFeed(): RefreshFeedResult {
-        val response = feedApi.getFeed()
         return try {
+            val response = feedApi.getFeed()
             // map the feed items
             // cache the feed items
             RefreshFeedResult.Success

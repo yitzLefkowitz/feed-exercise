@@ -6,7 +6,8 @@ package com.lightricks.feedexercise.data
  * The rest of the properties are left out for brevity.
  */
 data class FeedItem(
-    val id: String,
+    val id: Int = 0,
+    val feedItemId: String,
     val thumbnailUrl: String,
     val isPremium: Boolean
 )
