@@ -4,12 +4,13 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 abstract class FeedDao {
 
     @Query("SELECT * FROM ${FeedEntity.TABLE_NAME}")
-    abstract fun getAllFeedItems()
+    abstract fun getAllFeedItems(): Flow<List<FeedEntity>>
 
     @Transaction
     suspend fun replaceFeedItems(feedItems: List<FeedEntity>) {
