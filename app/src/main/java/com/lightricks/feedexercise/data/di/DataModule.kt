@@ -1,14 +1,17 @@
-package com.lightricks.feedexercise.di
+package com.lightricks.feedexercise.data.di
 
+import android.content.Context
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.lightricks.feedexercise.data.FeedRepository
 import com.lightricks.feedexercise.data.FeedRepositoryImpl
-import com.lightricks.feedexercise.data.OkHttpClientFactory
-import com.lightricks.feedexercise.network.FeedApiService
+import com.lightricks.feedexercise.data.database.FeedDatabase
+import com.lightricks.feedexercise.data.network.FeedApiService
+import com.lightricks.feedexercise.data.network.OkHttpClientFactory
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
@@ -41,6 +44,13 @@ object DataModule {
     @Provides
     fun provideFeedApiService(retrofit: Retrofit): FeedApiService =
         retrofit.create(FeedApiService::class.java)
+
+
+    @Singleton
+    @Provides
+    fun provideFeedDb(@ApplicationContext context: Context): FeedDatabase {
+        return FeedDatabase.Factory.create(context)
+    }
 }
 
 @Module

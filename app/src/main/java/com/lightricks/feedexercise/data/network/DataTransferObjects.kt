@@ -1,4 +1,4 @@
-package com.lightricks.feedexercise.network
+package com.lightricks.feedexercise.data.network
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

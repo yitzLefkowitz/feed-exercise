@@ -1,4 +1,4 @@
-package com.lightricks.feedexercise.network
+package com.lightricks.feedexercise.data.network
 
 import kotlinx.serialization.Serializable
 import retrofit2.http.GET
