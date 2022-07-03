@@ -13,7 +13,7 @@ abstract class FeedDao {
     abstract fun getAllFeedItems(): Flow<List<FeedEntity>>
 
     @Transaction
-    suspend fun replaceFeedItems(feedItems: List<FeedEntity>) {
+    suspend fun replaceFeedItems(feedItems: Collection<FeedEntity>) {
         clear()
         insertFeedItems(feedItems)
     }
