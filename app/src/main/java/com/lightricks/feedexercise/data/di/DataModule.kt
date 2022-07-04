@@ -5,6 +5,7 @@ import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFact
 import com.lightricks.feedexercise.data.FeedRepository
 import com.lightricks.feedexercise.data.FeedRepositoryImpl
 import com.lightricks.feedexercise.data.database.FeedDatabase
+import com.lightricks.feedexercise.data.network.BASE_URL
 import com.lightricks.feedexercise.data.network.FeedApiService
 import com.lightricks.feedexercise.data.network.OkHttpClientFactory
 import dagger.Binds
@@ -34,7 +35,7 @@ object DataModule {
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         val contentType = "application/json".toMediaType()
         return Retrofit.Builder()
-            .baseUrl("https://assets.swishvideoapp.com/")
+            .baseUrl(BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(Json.asConverterFactory(contentType))
             .build()
@@ -49,6 +50,7 @@ object DataModule {
     @Singleton
     @Provides
     fun provideFeedDb(@ApplicationContext context: Context): FeedDatabase {
+        @Suppress("RedundantCompanionReference")
         return FeedDatabase.Factory.create(context)
     }
 }
