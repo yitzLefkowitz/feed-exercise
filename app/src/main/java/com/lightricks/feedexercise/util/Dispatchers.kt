@@ -3,6 +3,7 @@ package com.lightricks.feedexercise.util
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,7 +30,7 @@ class FeedDispatchersImpl @Inject constructor(appScope: AppScope) : FeedDispatch
 @Singleton
 class AppScope @Inject constructor() : CoroutineScope by MainScope()
 
-@InstallIn(AppScope::class)
+@InstallIn(SingletonComponent::class)
 @Module
 abstract class FeedDispatchersBindModule {
 
